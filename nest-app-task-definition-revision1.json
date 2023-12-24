@@ -1,9 +1,9 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:443176363287:task-definition/nest-app-task-definition:1",
+  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:443176363287:task-definition/nest-app-task-definition:6",
   "containerDefinitions": [
     {
       "name": "nest-app",
-      "image": "443176363287.dkr.ecr.ap-south-1.amazonaws.com/deployimg/nest-app:latest",
+      "image": "443176363287.dkr.ecr.ap-south-1.amazonaws.com/deployimg:905d3fef960363a04e2176fa739d6ec8653d785e",
       "cpu": 0,
       "portMappings": [
         {
@@ -15,10 +15,27 @@
         }
       ],
       "essential": true,
-      "environmentFiles": [],
+      "environment": [],
       "mountPoints": [],
       "volumesFrom": [],
-      "ulimits": [],
+      "secrets": [
+        {
+          "name": "RDS_HOSTNAME",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R"
+        },
+        {
+          "name": "RDS_DATABASE",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R"
+        },
+        {
+          "name": "RDS_USERNAME",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R"
+        },
+        {
+          "name": "RDS_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R"
+        }
+      ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
@@ -35,7 +52,7 @@
   "taskRoleArn": "arn:aws:iam::443176363287:role/ecsTaskExecutionRole",
   "executionRoleArn": "arn:aws:iam::443176363287:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
-  "revision": 1,
+  "revision": 6,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
@@ -50,6 +67,9 @@
     },
     {
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "name": "ecs.capability.secrets.asm.environment-variables"
     },
     {
       "name": "com.amazonaws.ecs.capability.task-iam-role"
@@ -76,7 +96,7 @@
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-12-24T15:26:09.259Z",
+  "registeredAt": "2023-12-24T20:59:07.250Z",
   "registeredBy": "arn:aws:iam::443176363287:user/nj",
   "tags": []
 }
