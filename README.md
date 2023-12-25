@@ -1,73 +1,54 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# CI/CD Pipeline for NestJS Application
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Key Components
 
-## Description
+- Version Control: Git (GitHub)
+- CI/CD Tool: GitHub Actions
+- Containerization: Docker
+- Database: PostgreSQL (AWS RDS)
+- Deployment Infrastructure: AWS ECS
+- Region: ap-south-1
+- Load Balancing : Application Load Balancer
+- Monitoring and Logging: AWS CloudWatch
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Workflow
 
-## Installation
+### Build Job
 
-```bash
-$ npm install
-```
+- Triggers on push and pull_request events to the `main` branch
+- Builds and tests the NestJS application for Node.js versions 19.x and 20.x
+- Creates a `.env` file from secrets
+- Performs linting
 
-## Running the app
+### Deploy Job (if build successful)
 
-```bash
-# development
-$ npm run start
+- Configures AWS credentials
+- Builds and pushes a Docker image to Amazon ECR
+- Updates the ECS task definition with the new image
+- Deploys the updated task definition to ECS
 
-# watch mode
-$ npm run start:dev
+## Prerequisites
 
-# production mode
-$ npm run start:prod
-```
+- An AWS account with necessary permissions
+- An AWS RDS PostgreSQL instance
+- An AWS ECS cluster
+- An Amazon ECR repository
+- An AWS Application Load Balancer (configured separately)
 
-## Test
+## Configuration
 
-```bash
-# unit tests
-$ npm run test
+ - GitHub Actions Workflow: The pipeline is defined in the .github/workflows/nestjs-ci.yml file.
+ - Environment Variables: Store sensitive information in GitHub repository secrets:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - ENV_FILE (containing environment variables for the NestJS application)
+ - Task Definition: The nest-app-task-definition-revision1.json file specifies container configurations.
 
-# e2e tests
-$ npm run test:e2e
+## Usage
 
-# test coverage
-$ npm run test:cov
-```
+1. Commit and push changes to the `main` branch to trigger the CI/CD workflow.
+2. Monitor the workflow progress in the Actions tab of your GitHub repository.
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## Additional Information
+- Container on ECS has access to environment variables through AWS secret manager
+- Task definition file: `nest-app-task-definition-revision1.json` (located in the root of the repository)
