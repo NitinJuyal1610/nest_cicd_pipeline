@@ -12,7 +12,7 @@ import { ConfigService } from '@nestjs/config';
       useFactory: async (configService: ConfigService) => ({
         type: 'postgres',
         host: configService.get('RDS_HOSTNAME'),
-        port: 3000,
+        port: 5432,
         username: configService.get('RDS_USERNAME'),
         password: configService.get('RDS_PASSWORD'),
         database: configService.get('RDS_DATABASE'),
