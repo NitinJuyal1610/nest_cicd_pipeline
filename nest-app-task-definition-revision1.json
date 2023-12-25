@@ -1,9 +1,9 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:443176363287:task-definition/nest-app-task-definition:6",
+  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:443176363287:task-definition/nest-app-task-definition:11",
   "containerDefinitions": [
     {
       "name": "nest-app",
-      "image": "443176363287.dkr.ecr.ap-south-1.amazonaws.com/deployimg:905d3fef960363a04e2176fa739d6ec8653d785e",
+      "image": "443176363287.dkr.ecr.ap-south-1.amazonaws.com/deployimg:29eb6bb69c4a0f4d3169eb5a34a68d71f914d885",
       "cpu": 0,
       "portMappings": [
         {
@@ -20,20 +20,20 @@
       "volumesFrom": [],
       "secrets": [
         {
-          "name": "RDS_HOSTNAME",
-          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R"
-        },
-        {
           "name": "RDS_DATABASE",
-          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R"
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R:RDS_DATABASE"
         },
         {
-          "name": "RDS_USERNAME",
-          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R"
+          "name": "RDS_HOSTNAME",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R:RDS_HOSTNAME"
         },
         {
           "name": "RDS_PASSWORD",
-          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R"
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R:RDS_PASSWORD"
+        },
+        {
+          "name": "RDS_USERNAME",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R:RDS_USERNAME"
         }
       ],
       "logConfiguration": {
@@ -52,7 +52,7 @@
   "taskRoleArn": "arn:aws:iam::443176363287:role/ecsTaskExecutionRole",
   "executionRoleArn": "arn:aws:iam::443176363287:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
-  "revision": 6,
+  "revision": 11,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
@@ -96,7 +96,7 @@
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-12-24T20:59:07.250Z",
+  "registeredAt": "2023-12-25T06:17:20.453Z",
   "registeredBy": "arn:aws:iam::443176363287:user/nj",
   "tags": []
 }
