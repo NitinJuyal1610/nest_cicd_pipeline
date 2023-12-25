@@ -21,19 +21,19 @@
       "secrets": [
         {
           "name": "RDS_DATABASE",
-          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R:RDS_DATABASE"
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R:RDS_DATABASE::"
         },
         {
           "name": "RDS_HOSTNAME",
-          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R:RDS_HOSTNAME"
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R:RDS_HOSTNAME::"
         },
         {
           "name": "RDS_PASSWORD",
-          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R:RDS_PASSWORD"
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R:RDS_PASSWORD::"
         },
         {
           "name": "RDS_USERNAME",
-          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R:RDS_USERNAME"
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:443176363287:secret:db-W0Wl1R:RDS_USERNAME::"
         }
       ],
       "logConfiguration": {
